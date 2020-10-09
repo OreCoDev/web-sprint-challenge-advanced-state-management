@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const FETCH_SMURF_START = "FETCH_SMURF_START"
 export const FETCH_SMURF_SUCCESS = 'FETCH_SMURF_SUCCESS'
-export const FETCH_SMURF_FAILURE = 'FETCH_SMURF_FAILURE'
+export const ADD_SMURF = "ADD_SMURF";
 
 export const fetchSmurf = (url) => (dispatch) => {
     dispatch({ type: FETCH_SMURF_START})
@@ -13,18 +13,29 @@ export const fetchSmurf = (url) => (dispatch) => {
         dispatch({type: FETCH_SMURF_SUCCESS, payload: res.data})
     })
     .catch ((err) => console.log(err))
+  }
 
-
-
-const postNewSmurf = newSmurf => {
+  export const addSmurf = (postUrl) => (dispatch) => {
+    dispatch({ type: ADD_SMURF})
     axios
-    .post('', newSmurf)
-    .then(res => {
-      setSmurf([...state, res.data])
-    })
-    .catch (err => {
-      console.log(err)
-    })
+    .post(postUrl)
+    .then((res) => {
+      dispatch({type: ADD_SMURF, payload: res.data})
+  })
+  .catch ((err) => console.log(err))
+  }
+  
 
-}
-}
+// export const addSmurf = newSmurf => {
+//   return dispatch => {
+//     axios
+//     .post(postUrl, newSmurf)
+//     .then ((res) => {
+//       dispatch({type: ADD_SMURF, payload: res.data})
+//     })
+//     .catch((err) => {
+//       console.log(err)
+//     })
+//   }
+// }
+

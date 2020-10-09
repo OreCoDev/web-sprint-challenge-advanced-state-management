@@ -1,41 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import {addSmurf} from '../actions/AddSmurf'
+import Smurf from './Smurf'
+import {fetchSmurf} from '../actions/actions'
 
 
-class SmurfList extends React.Component  {
-state = {
-        name: '',
-        age:'',
-    height: '' ,
-   }
 
+const SmurfList = props => {
+  useEffect (() => {
+    props.fetchSmurf()
+  }, [])
 
- handleChanges = e => {
-    this.setState({addSmurf: e.target.value})
+  return (
+    <div>  <h1>Smurf List</h1>
+    {props.smurfs.length > 0 && props.smurfs.map(smurf => (
+      <Smurf key={smurf.id} smurf={smurf}/>
+    ))}
+      </div>
+  )
+
+  
 }
- addSmurf = e => {
-     e.preventDefault()
-     this.props.addSmurf(this.state.addSmurf)
- }
-render() {
- return (
-     <div>
-         <input 
-         type="text"
-         value={this.state.addSmurf}
-         onChange={this.handleChanges}
-         placeholder="Add new smurf"
-         />
-     </div>
- )
-}
-}
-const mapStateToProps = (state) => {
-    return {
-      name: state.name
-    }
+
+const mapStateToProps = state => {
+  return {
+    isLoading: state.isLoading,
+    smurfs: state.smurfs,
+    error: state.error
+
   }
-
-
-export default connect(mapStateToProps, {addSmurf})(SmurfList);
+}
+export default connect (mapStateToProps, {fetchSmurf})(SmurfList)
