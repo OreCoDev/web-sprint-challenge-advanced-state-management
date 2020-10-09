@@ -15,27 +15,27 @@ export const fetchSmurf = (url) => (dispatch) => {
     .catch ((err) => console.log(err))
   }
 
-  export const addSmurf = (postUrl) => (dispatch) => {
-    dispatch({ type: ADD_SMURF})
-    axios
-    .post(postUrl)
-    .then((res) => {
-      dispatch({type: ADD_SMURF, payload: res.data})
-  })
-  .catch ((err) => console.log(err))
-  }
+  // export const addSmurf = (postUrl) => (dispatch) => {
+  //   dispatch({ type: ADD_SMURF})
+  //   axios
+  //   .post('')
+  //   .then((res) => {
+  //     dispatch({type: ADD_SMURF, payload: res.data})
+  // })
+  // .catch ((err) => console.log(err))
+  // }
   
 
-// export const addSmurf = newSmurf => {
-//   return dispatch => {
-//     axios
-//     .post(postUrl, newSmurf)
-//     .then ((res) => {
-//       dispatch({type: ADD_SMURF, payload: res.data})
-//     })
-//     .catch((err) => {
-//       console.log(err)
-//     })
-//   }
-// }
+export const addSmurf = newSmurf => {
+  return dispatch => {
+    axios
+    .post('http://localhost:3333/smurfs', newSmurf)
+    .then ((res) => {
+      dispatch({type: ADD_SMURF, payload: res.data})
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+}
 

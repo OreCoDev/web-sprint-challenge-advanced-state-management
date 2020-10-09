@@ -23,29 +23,30 @@ const AddSmurf = props => {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <label>Name: </label>
+            <label>Name: 
             <input type="text"
             name='name'
             value={values.name}
             onChange={handleChanges}
             />
-               <label>Age: </label>
+            </label>
+               <label>Age: 
             <input type="text"
             name='Age'
             value={values.age}
             onChange={handleChanges}
-            />
-               <label>Height: </label>
+            /></label>
+               <label>Height:
             <input type="text"
             name='Height'
             value={values.height}
             onChange={handleChanges}
-            />
+            /> </label>
 <button>Add Smurf</button>
         </form>
     )
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
         isLoading: state.isLoading,
         smurfs: state.smurfs,
